@@ -1,0 +1,176 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+* {
+  background-color: rgb(186, 219, 208);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-section {
+  background-color: rgb(74, 129, 110);
+  width: 350px;
+  height: 150px;
+  border: 2px solid white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.input-section label,
+.input-section input,
+.input-section button {
+  background-color: transparent;
+}
+
+.input-section input {
+  width: 200px;
+  border-radius: 12px;
+  background-color: white;
+  padding: 0.5rem;
+  outline: transparent;
+  border: transparent;
+  transition: all 0.3s ease-in-out;
+}
+.input-section input:active,
+.input-section input:focus {
+  outline: pink;
+  border: 2px solid pink;
+  transform: scale(1.2);
+}
+
+.input-section button {
+  width: 100px;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 2px solid black;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-section button:hover {
+  background-color: white;
+  color: rgb(74, 129, 110);
+}
+button:hover {
+  cursor: pointer;
+}
+
+.main-section {
+  margin: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.tasks {
+  width: 300px;
+  height: fit-content;
+  border-radius: 10px;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.tasks h2 {
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: rgb(74, 129, 110);
+  width: 50%;
+}
+
+.list-container {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+li {
+  width: 90%;
+  background-color: rgb(74, 129, 110);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+li label {
+  background-color: transparent;
+}
+
+.buttons {
+  background-color: transparent;
+  display: flex;
+  gap: 1rem;
+}
+
+.buttons button {
+  border: none;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+.move-left,
+.move-right {
+  border: none;
+  background-color: white;
+  border-radius: 5px;
+  margin: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.move-left:hover,
+.move-right:hover {
+  background-color: rgb(186, 219, 208);
+}
+@media (max-width: 480px) {
+  .input-section {
+    background-color: rgb(74, 129, 110);
+    width: 200px;
+    height: 150px;
+    border: 2px solid white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .main-section {
+    margin: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
