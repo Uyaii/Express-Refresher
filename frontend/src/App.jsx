@@ -4,6 +4,8 @@ import InputForm from "./components/InputForm";
 import axios from "axios";
 import { Route, Routes } from "react-router";
 import LoginForm from "./components/LoginForm";
+import MainSection from "./components/MainSection";
+import WelcomeTab from "./components/WelcomeTab";
 
 function App() {
   const storedTasks = localStorage.getItem("tasks");
@@ -114,15 +116,14 @@ function App() {
   //   });
   // };
 
-
   return (
     <section className="app">
       <Routes>
-      <Route index element={<LoginForm/>}/>
+        <Route path="/" element={<WelcomeTab />} />
+        <Route path="/login" element={<LoginForm />} />
 
+        <Route path="/home" element={<MainSection />} />
       </Routes>
-        
-
     </section>
   );
 }

@@ -1,14 +1,22 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
+import MainSection from "./MainSection";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const api = "http://localhost:3000";
-  const authUser = async (username, password) => {
+  let navigate = useNavigate();
+  const authUser = async (e, username, password) => {
+    e.preventDefault();
     try {
-      const response = await axios.pot(`${}`);
+      // .post because we're sending info there
+      const response = await axios.post(`${api}/login`, { username, password });
+      if (response.data.message === "Authenticated") navigate(<MainSection />);
+
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +37,9 @@ const LoginForm = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="button">Login</button>
+      <button type="button" onClick={(e) => authUser(e, username, password)}>
+        Login
+      </button>
     </form>
   );
 };
