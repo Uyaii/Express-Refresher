@@ -13,8 +13,11 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       // .post because we're sending info there
-      const response = await axios.post(`${api}/login`, { username, password });
-      if (response.data.message === "Authenticated") navigate(<MainSection />);
+      const response = await axios.post(`${api}/login/submit`, {
+        username,
+        password,
+      });
+      if (response.data.message === "Authenticated") navigate("/home");
 
       console.log(response.data);
     } catch (error) {
