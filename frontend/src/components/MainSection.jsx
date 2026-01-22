@@ -8,11 +8,27 @@ import { useState } from "react";
 const MainSection = ({ task, setTask, editId, setEditId, api }) => {
   const [allTasks, setAllTasks] = useState([]);
 
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get(`${api}/home`);
+
+        setAllTasks(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchTasks();
+  }, [api]);
+  //  * Backend stuff
+
   // * DONE!!!!!!!!!!!!!!
   const TriggerEditTask = (item) => {
     setTask(item.name);
     setEditId(item.id);
   };
+
   // * DONE!!!!!!!!!!!!!! X2
   const editTask = async (e) => {
     e.preventDefault();
@@ -61,63 +77,31 @@ const MainSection = ({ task, setTask, editId, setEditId, api }) => {
       console.log(error);
     }
   };
-
-  const moveRight = (item) => {
-    const updatedTasks = allTasks.map((task) => {
-      if (!task) return null; // to avoid null values
-      if (task.id === item.id) {
-        let newTask = task;
-        if (task.status === "todo") {
-          newTask = { ...task, status: "in-progress" };
-        } else if (task.status === "in-progress") {
-          newTask = { ...task, status: "done" };
-        } else if (task.status === "done") {
-          newTask = { ...task };
-          deleteTask(newTask);
-          return;
-        }
-        return newTask;
+  // * DONE!!!!!!!!!!!!!! X2
+  const moveRight = async (item) => {
+    console.log(item);
+    try {
+      if ((await item.status) === "done") {
+        deleteTask(item);
+        return;
       }
-      return task;
-    });
-    setAllTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      const response = await axios.patch(`${api}/moveRight/${item.id}`);
+      console.log(response.data);
+      setAllTasks(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const moveLeft = (item) => {
-    const updatedTasks = allTasks.map((task) => {
-      if (!task) return null; // to avoid null values
-      if (task.id === item.id) {
-        let newTask = task;
-        if (task.status === "todo") {
-          newTask = { ...task };
-        } else if (task.status === "in-progress") {
-          newTask = { ...task, status: "todo" };
-        } else if (task.status === "done") {
-          newTask = { ...task, status: "in-progress" };
-        }
-        return newTask;
-      }
-      return task;
-    });
-    setAllTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  const moveLeft = async (item) => {
+    try {
+      const response = await axios.patch(`${api}/moveLeft/${item.id}`);
+
+      setAllTasks(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await axios.get(`${api}/home`);
-
-        setAllTasks(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchTasks();
-  }, [api]);
-  //  * Backend stuff
 
   return (
     <>
